@@ -1,0 +1,17 @@
+[Unit]
+Description=Mule ESB
+After=network.target
+
+[Service]
+Type=forking
+User=mule
+Group=mule
+
+ExecStart=/opt/mule-standalone-3.8.0/bin/mule start
+ExecStop=/opt/mule-standalone-3.8.0/bin/mule stop
+ExecReload=/opt/mule-standalone-3.8.0/bin/mule restart
+
+#TimeoutSec=300
+
+[Install]
+WantedBy=multi-user.target

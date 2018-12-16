@@ -1,0 +1,45 @@
+version: '3.3'
+
+services:
+#mule
+ mule:
+  build: ./mule
+  container_name: mule
+  ports:
+   - "8081:8081"
+   - "1099:1099"
+   - "8899:8899"
+   - "7777:7777"
+   - "1098:1098"
+   - "7001:7001"
+   - "7002:7002"
+   - "9090:9090"
+  volumes:
+    - ./mule/artifacts/:/opt/mule-standalone-3.8.0/apps/
+    - ./logs/mule/:/opt/mule-standalone-3.8.0/logs/
+
+#activeMq
+ activemq:
+  build: ./activeMq
+  container_name: activeMq
+  ports:
+   - "61616:61616" # broker (admin:adminactivemq)(amq:amq)
+   - "8161:8161"   # web    http://boot2docker:8161/admin (admin:admin)
+
+
+ postgre:
+  build: ./postgre
+  container_name: postgre
+  ports:
+    - "5432:5432"
+    - "5433:5433"
+  volumes:
+    - ./postgre-db/:/var/lib/postgresql/data
+
+
+ python:
+  build: ./python
+  container_name: python
+
+
+
